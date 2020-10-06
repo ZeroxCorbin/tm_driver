@@ -12,10 +12,19 @@ if(NOT json_POPULATED)
   FetchContent_Populate(json)
   add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
-add_executable(myapp main.cpp tm_driver/tm_communication.cpp tm_driver/tm_command.cpp tm_driver/tm_packet.cpp tm_driver/tm_driver.cpp tm_driver/tm_print.cpp tm_driver/tm_robot_state.cpp tm_driver/tm_sct_communication.cpp tm_driver/tm_svr_communication.cpp )
+add_executable(myapp
+src/main.cpp 
+src/tm_driver/tm_communication.cpp
+src/tm_driver/tm_command.cpp 
+src/tm_driver/tm_packet.cpp 
+src/tm_driver/tm_driver.cpp 
+src/tm_driver/tm_print.cpp
+src/tm_driver/tm_robot_state.cpp
+src/tm_driver/tm_sct_communication.cpp
+src/tm_driver/tm_svr_communication.cpp )
 
 target_link_libraries(myapp PRIVATE nlohmann_json::nlohmann_json)
 
-include_directories(include tm_driver/tm_msgs/srv tm_driver/tm_msgs/msg)
+include_directories(include src/tm_driver/tm_msgs/srv src/tm_driver/tm_msgs/msg)
 
 install(TARGETS myapp DESTINATION bin)
